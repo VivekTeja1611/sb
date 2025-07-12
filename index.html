@@ -1,27 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Happy Birthday!</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Poppins:wght@300;400;500&display=swap');
-        
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
-        /* Force light mode regardless of browser preference */
-        :root {
-            color-scheme: light only;
-        }
-        
-        html {
-            color-scheme: light;
-        }
-        
+
         body {
             font-family: 'Poppins', sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -32,7 +24,7 @@
             justify-content: center;
             overflow-x: hidden;
         }
-        
+
         .birthday-title {
             font-family: 'Dancing Script', cursive;
             font-size: 4rem;
@@ -40,53 +32,62 @@
             color: #fff;
             text-align: center;
             margin-bottom: 3rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
             opacity: 0;
             transform: translateY(-50px);
             animation: titleFadeIn 2s ease-out forwards;
         }
-        
+
         @keyframes titleFadeIn {
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
-        
+
+        .letter-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 15px 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: block;
+        }
+
         .letter-container {
             perspective: 1000px;
             margin-top: 2rem;
             opacity: 0;
             animation: containerFadeIn 1s ease-out 2.5s forwards;
         }
-        
+
         @keyframes containerFadeIn {
             to {
                 opacity: 1;
             }
         }
-        
+
         .letter {
             width: 400px;
             height: 500px;
             background: linear-gradient(145deg, #f9f9f9, #e8e8e8);
             border-radius: 15px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
             position: relative;
             transform-style: preserve-3d;
             cursor: pointer;
             transition: transform 0.3s ease;
         }
-        
+
         .letter:hover {
             transform: scale(1.02);
         }
-        
+
         .letter-front {
             position: absolute;
             width: 100%;
             height: 100%;
-            background: linear-gradient(145deg, #ffffff, #f0f0f0);
+            background: linear-gradient(145deg, #fff, #f0f0f0);
             border-radius: 15px;
             border: 2px solid #e0e0e0;
             transform-origin: left;
@@ -99,14 +100,14 @@
             font-family: 'Dancing Script', cursive;
             font-size: 1.5rem;
             color: #666;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
         }
-        
+
         .letter-back {
             position: absolute;
             width: 100%;
             height: 100%;
-            background: linear-gradient(145deg, #ffffff, #f8f8f8);
+            background: linear-gradient(145deg, #fff, #f8f8f8);
             border-radius: 15px;
             border: 2px solid #e0e0e0;
             transform: rotateY(180deg);
@@ -115,22 +116,22 @@
             overflow-y: auto;
             z-index: 1;
         }
-        
+
         .letter.unfolded .letter-front {
             transform: rotateY(-180deg);
         }
-        
+
         .letter.unfolded .letter-back {
             transform: rotateY(0deg);
         }
-        
+
         .letter-content {
             font-size: 0.95rem;
             line-height: 1.6;
             color: #333;
             text-align: justify;
         }
-        
+
         .letter-header {
             font-family: 'Dancing Script', cursive;
             font-size: 1.8rem;
@@ -138,14 +139,14 @@
             margin-bottom: 20px;
             text-align: center;
         }
-        
+
         .letter-date {
             text-align: right;
             font-size: 0.9rem;
             color: #666;
             margin-bottom: 20px;
         }
-        
+
         .letter-signature {
             margin-top: 30px;
             text-align: right;
@@ -153,7 +154,7 @@
             font-size: 1.2rem;
             color: #667eea;
         }
-        
+
         .unfold-hint {
             position: absolute;
             bottom: -50px;
@@ -164,13 +165,13 @@
             opacity: 0;
             animation: hintFadeIn 1s ease-out 4s forwards;
         }
-        
+
         @keyframes hintFadeIn {
             to {
                 opacity: 0.8;
             }
         }
-        
+
         .sparkles {
             position: absolute;
             width: 100%;
@@ -178,7 +179,7 @@
             pointer-events: none;
             overflow: hidden;
         }
-        
+
         .sparkle {
             position: absolute;
             width: 4px;
@@ -187,124 +188,120 @@
             border-radius: 50%;
             animation: sparkleFloat 4s linear infinite;
         }
-        
+
         @keyframes sparkleFloat {
             0% {
                 transform: translateY(100vh) rotate(0deg);
                 opacity: 0;
             }
+
             10% {
                 opacity: 1;
             }
+
             90% {
                 opacity: 1;
             }
+
             100% {
                 transform: translateY(-100px) rotate(360deg);
                 opacity: 0;
             }
         }
-        
+
         @media (max-width: 768px) {
             .birthday-title {
                 font-size: 3rem;
                 margin-bottom: 2rem;
                 padding: 0 1rem;
             }
-            
+
             .letter {
                 width: 90vw;
                 max-width: 380px;
                 height: 70vh;
                 max-height: 500px;
                 margin: 0 1rem;
-                background: #f5f5f5 !important;
             }
-            
-            .letter-front {
-                background: #ffffff !important;
-            }
-            
+
             .letter-back {
                 padding: 25px;
-                background: #ffffff !important;
             }
-            
+
             .letter-content {
                 font-size: 1rem;
                 line-height: 1.7;
-                color: #333 !important;
             }
-            
+
             .letter-header {
                 font-size: 1.6rem;
                 margin-bottom: 15px;
             }
-            
+
             .unfold-hint {
                 bottom: -40px;
                 font-size: 0.85rem;
             }
         }
-        
+
         @media (max-width: 480px) {
             .birthday-title {
                 font-size: 2.2rem;
                 margin-bottom: 1.5rem;
             }
-            
+
             .letter {
                 width: 95vw;
                 max-width: 350px;
                 height: 75vh;
                 max-height: 480px;
             }
-            
+
             .letter-back {
                 padding: 20px;
             }
-            
+
             .letter-content {
                 font-size: 0.9rem;
                 line-height: 1.6;
             }
-            
+
             .letter-header {
                 font-size: 1.4rem;
             }
-            
+
             .letter-date {
                 font-size: 0.8rem;
             }
-            
+
             .letter-signature {
                 font-size: 1.1rem;
                 margin-top: 20px;
             }
         }
-        
+
         @media (max-width: 320px) {
             .birthday-title {
                 font-size: 1.8rem;
             }
-            
+
             .letter {
                 width: 98vw;
                 height: 80vh;
                 max-height: 450px;
             }
-            
+
             .letter-back {
                 padding: 15px;
             }
         }
     </style>
 </head>
+
 <body>
     <div class="sparkles"></div>
-    
-    <h1 class="birthday-title">Happy Birthday [Name]!</h1>
-    
+    <h1 class="birthday-title">Happy Birthday SUSMITHA!!!</h1>
+
     <div class="letter-container">
         <div class="letter" id="birthdayLetter">
             <div class="letter-front">
@@ -312,36 +309,47 @@
             </div>
             <div class="letter-back">
                 <div class="letter-content">
-                    <div class="letter-header">A Special Message For You</div>
-                    <div class="letter-date">Today's Date</div>
-                    
-                    <p>Dear Beautiful Soul,</p>
-                    
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                    
-                    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                    
-                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
-                    
-                    <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
-                    
-                    <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.</p>
-                    
+                    <div class="letter-header">A Special Message Only For You</div>
+                    <div class="letter-date">13/07//2025</div>
+                    <p>My Dear Cute Lady,</p>
+                    <p>It's been 259 days(~8 1/2 months) since we had our first conversation(27/10/2024), it has been a
+                        great time I spent with you(you may probaly think when😂),
+                    </p>
+                    <p> Even though I couldn't understand you properly till now. </p>
+                    <br>
+                    <p>Remember, The time when we went to marine drive!</p>
+                    <img src="grp_pic_sus.jpg" alt="">
+                    <p>I Remember the day of betrayal also, you said you would come to treat but you didn't...😂</p>
+                    <p>you guys also saved me from police case😂😂,especially ,you were saying them "No one went on the
+                        Terapods" when others were silent😂</p>
+                    <br>
+                    <p>Many things Happened Later days.....even the day when i came to know that you Don't know my name
+                        😂(Exposedd!!😂)</p>
+                    <br>
+                    <p>you know what, something was difficult for me more than JEE, and that was to get chance to talk
+                        with you,
+                        I even did some crazy things for that😂 </p>
+                    <p>It's been 8 months, But, I don't think you are comfortable to talk even now, But, Just Remember
+                        ,I will always be behind you whatever the situation is,it's not gonna change,
+                        you have a person on whom you can always relay on in difficult situations.
+                    </p>
+                    <br>
+                    <p>Looking forward the Upcoming days, we will be spending.</p>
+                    <p>Happy Birthday Once again!!</p>
                     <div class="letter-signature">
                         With love and best wishes,<br>
-                        [Your Name]
+                        VivekTeja
                     </div>
                 </div>
             </div>
         </div>
         <div class="unfold-hint">Click the letter to unfold it</div>
     </div>
-    
     <script>
         // Create sparkles
         function createSparkles() {
             const sparklesContainer = document.querySelector('.sparkles');
-            
+
             setInterval(() => {
                 const sparkle = document.createElement('div');
                 sparkle.className = 'sparkle';
@@ -349,26 +357,26 @@
                 sparkle.style.animationDelay = Math.random() * 4 + 's';
                 sparkle.style.animationDuration = (Math.random() * 3 + 2) + 's';
                 sparklesContainer.appendChild(sparkle);
-                
+
                 setTimeout(() => {
                     sparkle.remove();
                 }, 6000);
             }, 300);
         }
-        
+
         let isUnfolded = false;
         let isMobile = window.innerWidth <= 768;
-        
+
         // Check if device is mobile
         window.addEventListener('resize', () => {
             isMobile = window.innerWidth <= 768;
         });
-        
+
         // Manual letter click handler
-        document.getElementById('birthdayLetter').addEventListener('click', function(e) {
+        document.getElementById('birthdayLetter').addEventListener('click', function (e) {
             const letter = this;
             const hint = document.querySelector('.unfold-hint');
-            
+
             if (!isUnfolded) {
                 // If folded, click anywhere to open
                 letter.classList.add('unfolded');
@@ -398,9 +406,10 @@
                 }
             }
         });
-        
+
         // Initialize
         createSparkles();
     </script>
 </body>
+
 </html>
