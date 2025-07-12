@@ -13,6 +13,15 @@
             box-sizing: border-box;
         }
         
+        /* Force light mode regardless of browser preference */
+        :root {
+            color-scheme: light only;
+        }
+        
+        html {
+            color-scheme: light;
+        }
+        
         body {
             font-family: 'Poppins', sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
