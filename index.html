@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday!</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Poppins:wght@300;400;500&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow-x: hidden;
+        }
+        
+        .birthday-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 4rem;
+            font-weight: 700;
+            color: #fff;
+            text-align: center;
+            margin-bottom: 3rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            opacity: 0;
+            transform: translateY(-50px);
+            animation: titleFadeIn 2s ease-out forwards;
+        }
+        
+        @keyframes titleFadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .letter-container {
+            perspective: 1000px;
+            margin-top: 2rem;
+            opacity: 0;
+            animation: containerFadeIn 1s ease-out 2.5s forwards;
+        }
+        
+        @keyframes containerFadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+        
+        .letter {
+            width: 400px;
+            height: 500px;
+            background: linear-gradient(145deg, #f9f9f9, #e8e8e8);
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            position: relative;
+            transform-style: preserve-3d;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .letter:hover {
+            transform: scale(1.02);
+        }
+        
+        .letter-front {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(145deg, #fff, #f0f0f0);
+            border-radius: 15px;
+            border: 2px solid #e0e0e0;
+            transform-origin: left;
+            transform: rotateY(0deg);
+            transition: transform 3s ease-in-out;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.5rem;
+            color: #666;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        .letter-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(145deg, #fff, #f8f8f8);
+            border-radius: 15px;
+            border: 2px solid #e0e0e0;
+            transform: rotateY(180deg);
+            backface-visibility: hidden;
+            padding: 30px;
+            overflow-y: auto;
+            z-index: 1;
+        }
+        
+        .letter.unfolded .letter-front {
+            transform: rotateY(-180deg);
+        }
+        
+        .letter.unfolded .letter-back {
+            transform: rotateY(0deg);
+        }
+        
+        .letter-content {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #333;
+            text-align: justify;
+        }
+        
+        .letter-header {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.8rem;
+            color: #667eea;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .letter-date {
+            text-align: right;
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 20px;
+        }
+        
+        .letter-signature {
+            margin-top: 30px;
+            text-align: right;
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.2rem;
+            color: #667eea;
+        }
+        
+        .unfold-hint {
+            position: absolute;
+            bottom: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #fff;
+            font-size: 0.9rem;
+            opacity: 0;
+            animation: hintFadeIn 1s ease-out 4s forwards;
+        }
+        
+        @keyframes hintFadeIn {
+            to {
+                opacity: 0.8;
+            }
+        }
+        
+        .sparkles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        
+        .sparkle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #fff;
+            border-radius: 50%;
+            animation: sparkleFloat 4s linear infinite;
+        }
+        
+        @keyframes sparkleFloat {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .birthday-title {
+                font-size: 3rem;
+                margin-bottom: 2rem;
+                padding: 0 1rem;
+            }
+            
+            .letter {
+                width: 90vw;
+                max-width: 380px;
+                height: 70vh;
+                max-height: 500px;
+                margin: 0 1rem;
+            }
+            
+            .letter-back {
+                padding: 25px;
+            }
+            
+            .letter-content {
+                font-size: 1rem;
+                line-height: 1.7;
+            }
+            
+            .letter-header {
+                font-size: 1.6rem;
+                margin-bottom: 15px;
+            }
+            
+            .unfold-hint {
+                bottom: -40px;
+                font-size: 0.85rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .birthday-title {
+                font-size: 2.2rem;
+                margin-bottom: 1.5rem;
+            }
+            
+            .letter {
+                width: 95vw;
+                max-width: 350px;
+                height: 75vh;
+                max-height: 480px;
+            }
+            
+            .letter-back {
+                padding: 20px;
+            }
+            
+            .letter-content {
+                font-size: 0.9rem;
+                line-height: 1.6;
+            }
+            
+            .letter-header {
+                font-size: 1.4rem;
+            }
+            
+            .letter-date {
+                font-size: 0.8rem;
+            }
+            
+            .letter-signature {
+                font-size: 1.1rem;
+                margin-top: 20px;
+            }
+        }
+        
+        @media (max-width: 320px) {
+            .birthday-title {
+                font-size: 1.8rem;
+            }
+            
+            .letter {
+                width: 98vw;
+                height: 80vh;
+                max-height: 450px;
+            }
+            
+            .letter-back {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="sparkles"></div>
+    
+    <h1 class="birthday-title">Happy Birthday [Name]!</h1>
+    
+    <div class="letter-container">
+        <div class="letter" id="birthdayLetter">
+            <div class="letter-front">
+                <div>Click to open your letter 💌</div>
+            </div>
+            <div class="letter-back">
+                <div class="letter-content">
+                    <div class="letter-header">A Special Message For You</div>
+                    <div class="letter-date">Today's Date</div>
+                    
+                    <p>Dear Beautiful Soul,</p>
+                    
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                    
+                    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    
+                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+                    
+                    <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
+                    
+                    <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.</p>
+                    
+                    <div class="letter-signature">
+                        With love and best wishes,<br>
+                        [Your Name]
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="unfold-hint">Click the letter to unfold it</div>
+    </div>
+    
+    <script>
+        // Create sparkles
+        function createSparkles() {
+            const sparklesContainer = document.querySelector('.sparkles');
+            
+            setInterval(() => {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+                sparkle.style.left = Math.random() * 100 + '%';
+                sparkle.style.animationDelay = Math.random() * 4 + 's';
+                sparkle.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                sparklesContainer.appendChild(sparkle);
+                
+                setTimeout(() => {
+                    sparkle.remove();
+                }, 6000);
+            }, 300);
+        }
+        
+        let isUnfolded = false;
+        let isMobile = window.innerWidth <= 768;
+        
+        // Check if device is mobile
+        window.addEventListener('resize', () => {
+            isMobile = window.innerWidth <= 768;
+        });
+        
+        // Manual letter click handler
+        document.getElementById('birthdayLetter').addEventListener('click', function(e) {
+            const letter = this;
+            const hint = document.querySelector('.unfold-hint');
+            
+            if (!isUnfolded) {
+                // If folded, click anywhere to open
+                letter.classList.add('unfolded');
+                isUnfolded = true;
+                hint.style.display = 'none';
+            } else {
+                // If unfolded, handle closing differently for mobile vs desktop
+                if (isMobile) {
+                    // On mobile, check if clicked on the folded part (left edge)
+                    const rect = letter.getBoundingClientRect();
+                    const clickX = e.clientX - rect.left;
+                    if (clickX < 60) { // First 60px from left edge
+                        letter.classList.remove('unfolded');
+                        isUnfolded = false;
+                        hint.style.display = 'block';
+                    }
+                } else {
+                    // On desktop, use the original left half logic
+                    const rect = letter.getBoundingClientRect();
+                    const clickX = e.clientX - rect.left;
+                    const letterWidth = rect.width;
+                    if (clickX < letterWidth / 2) {
+                        letter.classList.remove('unfolded');
+                        isUnfolded = false;
+                        hint.style.display = 'block';
+                    }
+                }
+            }
+        });
+        
+        // Initialize
+        createSparkles();
+    </script>
+</body>
+</html>
